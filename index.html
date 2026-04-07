@@ -521,6 +521,18 @@ nav {
   align-items: center;
   gap: 5px;
 }
+.cat-card-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  background: var(--light-bg2);
+  transition: transform 0.3s ease;
+}
+.cat-card:hover .cat-card-img {
+  transform: scale(1.03);
+}
 
 /* ══════════════════════════════════════════════
    OUR SERVICES
@@ -1318,14 +1330,14 @@ footer {
 
   <!-- Category pills strip -->
   <div class="categories">
-    <div class="cat-pill"><span class="cat-icon">🏠</span> Home Goods</div>
-    <div class="cat-pill"><span class="cat-icon">👕</span> Garments & Textiles</div>
-    <div class="cat-pill"><span class="cat-icon">🧸</span> Toys & Games</div>
-    <div class="cat-pill"><span class="cat-icon">🚗</span> Auto Parts</div>
-    <div class="cat-pill"><span class="cat-icon">⚙️</span> Industrial Equipment</div>
-    <div class="cat-pill"><span class="cat-icon">🔧</span> Tools & Hardware</div>
-    <div class="cat-pill"><span class="cat-icon">☀️</span> Renewable Energy</div>
-    <div class="cat-pill"><span class="cat-icon">🏥</span> Medical Supplies</div>
+    <div class="cat-pill"><span class="cat-icon">💄</span> Beauty & Personal Care</div>
+    <div class="cat-pill"><span class="cat-icon">🧸</span> Toys & Baby Products</div>
+    <div class="cat-pill"><span class="cat-icon">🏠</span> Home Décor & Furniture</div>
+    <div class="cat-pill"><span class="cat-icon">☀️</span> Solar & Energy Solutions</div>
+    <div class="cat-pill"><span class="cat-icon">🔧</span> Tools, Machinery & Auto</div>
+    <div class="cat-pill"><span class="cat-icon">🏥</span> Health, Medical & Sports</div>
+    <div class="cat-pill"><span class="cat-icon">🌾</span> Agriculture & Industrial</div>
+    <div class="cat-pill"><span class="cat-icon">📎</span> Office, School & Stationery</div>
   </div>
 </section>
 
@@ -1352,58 +1364,66 @@ footer {
     <div class="categories-grid">
 
       <div class="cat-card">
-        <div class="cat-card-icon">🏠</div>
-        <div class="cat-card-name">Home Goods</div>
-        <div class="cat-card-desc">Kitchenware, furniture, décor, storage, bedding, and household essentials sourced from China's top manufacturers.</div>
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Beauty%20%26%20Personal%20Care.jpg" alt="Beauty & Personal Care" loading="lazy">
+        <div class="cat-card-icon">💄</div>
+        <div class="cat-card-name">Beauty & Personal Care</div>
+        <div class="cat-card-desc">Skincare, cosmetics, hair care, fragrances, personal hygiene products, and salon equipment from China's leading beauty manufacturers.</div>
         <div class="cat-card-arrow">Explore <span>→</span></div>
       </div>
 
       <div class="cat-card">
-        <div class="cat-card-icon">👕</div>
-        <div class="cat-card-name">Garments & Textiles</div>
-        <div class="cat-card-desc">Ready-made garments, fabrics, uniforms, sportswear, and custom-branded apparel with OEM capability.</div>
-        <div class="cat-card-arrow">Explore <span>→</span></div>
-      </div>
-
-      <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Toys%20%26%20Baby%20Products.jpg" alt="Toys & Baby Products" loading="lazy">
         <div class="cat-card-icon">🧸</div>
-        <div class="cat-card-name">Toys & Games</div>
-        <div class="cat-card-desc">Educational toys, board games, outdoor play equipment, action figures, and branded toy lines with safety certifications.</div>
+        <div class="cat-card-name">Toys & Baby Products</div>
+        <div class="cat-card-desc">Educational toys, infant gear, baby clothing, strollers, feeding accessories, and play equipment with international safety certifications.</div>
         <div class="cat-card-arrow">Explore <span>→</span></div>
       </div>
 
       <div class="cat-card">
-        <div class="cat-card-icon">🚗</div>
-        <div class="cat-card-name">Auto Parts</div>
-        <div class="cat-card-desc">OEM & aftermarket parts, filters, brakes, body kits, tyres, batteries, and accessories for all major vehicle brands.</div>
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Home%20D%C3%A9cor%20%26%20Furniture.jpg" alt="Home Décor & Furniture" loading="lazy">
+        <div class="cat-card-icon">🏠</div>
+        <div class="cat-card-name">Home Décor & Furniture</div>
+        <div class="cat-card-desc">Living room & bedroom furniture, decorative accessories, lighting fixtures, rugs, curtains, and kitchenware from top factories.</div>
         <div class="cat-card-arrow">Explore <span>→</span></div>
       </div>
 
       <div class="cat-card">
-        <div class="cat-card-icon">⚙️</div>
-        <div class="cat-card-name">Industrial Equipment</div>
-        <div class="cat-card-desc">CNC machines, compressors, welding systems, conveyor belts, and heavy-duty manufacturing machinery.</div>
-        <div class="cat-card-arrow">Explore <span>→</span></div>
-      </div>
-
-      <div class="cat-card">
-        <div class="cat-card-icon">🔧</div>
-        <div class="cat-card-name">Tools & Hardware</div>
-        <div class="cat-card-desc">Hand tools, power tools, fasteners, safety equipment, and workshop gear for trade and retail markets.</div>
-        <div class="cat-card-arrow">Explore <span>→</span></div>
-      </div>
-
-      <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Solar%20%26%20Energy%20Solutions.jpg" alt="Solar & Energy Solutions" loading="lazy">
         <div class="cat-card-icon">☀️</div>
-        <div class="cat-card-name">Renewable Energy & Power Solutions</div>
+        <div class="cat-card-name">Solar & Energy Solutions</div>
         <div class="cat-card-desc">Solar panels, inverters, lithium batteries, EV charging units, and off-grid energy systems from certified factories.</div>
         <div class="cat-card-arrow">Explore <span>→</span></div>
       </div>
 
       <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Tools%2C%20Machinery%20%26%20Automotive.jpg" alt="Tools, Machinery & Automotive" loading="lazy">
+        <div class="cat-card-icon">🔧</div>
+        <div class="cat-card-name">Tools, Machinery & Automotive</div>
+        <div class="cat-card-desc">Hand tools, power tools, CNC machines, compressors, OEM & aftermarket auto parts, and workshop gear for trade and retail.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Health%2C%20Medical%20%26%20Sports.jpg" alt="Health, Medical & Sports" loading="lazy">
         <div class="cat-card-icon">🏥</div>
-        <div class="cat-card-name">Medical Supplies</div>
-        <div class="cat-card-desc">Disposable PPE, diagnostic equipment, hospital furniture, surgical instruments, and FDA/CE certified medical devices.</div>
+        <div class="cat-card-name">Health, Medical & Sports</div>
+        <div class="cat-card-desc">Disposable PPE, diagnostic equipment, surgical instruments, fitness gear, sports apparel, and FDA/CE certified medical devices.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Agriculture%20%26%20Industrial.jpg" alt="Agriculture & Industrial" loading="lazy">
+        <div class="cat-card-icon">🌾</div>
+        <div class="cat-card-name">Agriculture & Industrial</div>
+        <div class="cat-card-desc">Irrigation systems, pesticide equipment, greenhouse supplies, fertilizers, and heavy-duty industrial machinery for farming operations.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <img class="cat-card-img" src="https://raw.githubusercontent.com/ahmadok12/Ezychinadirect/main/Images/LandingpageCategories/Office%2C%20School%20%26%20Stationery.jpg" alt="Office, School & Stationery" loading="lazy">
+        <div class="cat-card-icon">📎</div>
+        <div class="cat-card-name">Office, School & Stationery</div>
+        <div class="cat-card-desc">Office furniture, stationery supplies, printing materials, school bags, art supplies, and branded corporate gifting solutions.</div>
         <div class="cat-card-arrow">Explore <span>→</span></div>
       </div>
 
@@ -1760,14 +1780,14 @@ footer {
             <label for="category">Product Category</label>
             <select id="category">
               <option value="">— Select a category —</option>
-              <option>Home Goods</option>
-              <option>Garments & Textiles</option>
-              <option>Toys & Games</option>
-              <option>Auto Parts</option>
-              <option>Industrial Equipment</option>
-              <option>Tools & Hardware</option>
-              <option>Renewable Energy & Power Solutions</option>
-              <option>Medical Supplies</option>
+              <option>Beauty & Personal Care</option>
+              <option>Toys & Baby Products</option>
+              <option>Home Décor & Furniture</option>
+              <option>Solar & Energy Solutions</option>
+              <option>Tools, Machinery & Automotive</option>
+              <option>Health, Medical & Sports</option>
+              <option>Agriculture & Industrial</option>
+              <option>Office, School & Stationery</option>
               <option>Other</option>
             </select>
           </div>
@@ -1833,14 +1853,14 @@ footer {
     <div>
       <div class="footer-col-title">We Source</div>
       <ul class="footer-col-links">
-        <li><a href="#">🏠 Home Goods</a></li>
-        <li><a href="#">👕 Garments & Textiles</a></li>
-        <li><a href="#">🧸 Toys & Games</a></li>
-        <li><a href="#">🚗 Auto Parts</a></li>
-        <li><a href="#">⚙️ Industrial Equipment</a></li>
-        <li><a href="#">🔧 Tools & Hardware</a></li>
-        <li><a href="#">☀️ Renewable Energy</a></li>
-        <li><a href="#">🏥 Medical Supplies</a></li>
+        <li><a href="#">💄 Beauty & Personal Care</a></li>
+        <li><a href="#">🧸 Toys & Baby Products</a></li>
+        <li><a href="#">🏠 Home Décor & Furniture</a></li>
+        <li><a href="#">☀️ Solar & Energy Solutions</a></li>
+        <li><a href="#">🔧 Tools, Machinery & Auto</a></li>
+        <li><a href="#">🏥 Health, Medical & Sports</a></li>
+        <li><a href="#">🌾 Agriculture & Industrial</a></li>
+        <li><a href="#">📎 Office, School & Stationery</a></li>
       </ul>
     </div>
 
