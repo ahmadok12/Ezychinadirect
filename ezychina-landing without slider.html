@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EzyChinaDirect – Direct From China. Done Right.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0d1b2e;
+  --navy2: #142338;
+  --navy3: #1a2f47;
+  --red: #d42b2b;
+  --gold: #e8a020;
+  --gold-light: #f5c35a;
+  --sky1: #0a1a35;
+  --sky2: #0e2347;
+  --sky3: #102a56;
+  --water1: #061428;
+  --water2: #0a1d3a;
+  --water3: #0d2248;
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.65);
+  --font-head: 'Bebas Neue', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+
+  /* Light section palette */
+  --light-bg: #f7f8fc;
+  --light-bg2: #eef1f8;
+  --light-text: #0d1b2e;
+  --light-muted: #5a6a80;
+  --light-border: #dde3ef;
+  --light-card: #ffffff;
+}
+
+body { background: var(--navy); font-family: var(--font-body); overflow-x: hidden; }
+
+/* ══════════════════════════════════════════════
+   HERO (kept exactly from original)
+══════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 40%, var(--sky3) 65%, var(--water2) 65%, var(--water1) 100%);
+}
+.stars { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--d, 3s) ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: var(--op1, 0.9); transform: scale(1); }
+  50%       { opacity: var(--op2, 0.2); transform: scale(0.6); }
+}
+.moon {
+  position: absolute;
+  top: 6%; right: 10%;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #fffbe6 0%, #f5d97a 60%, #d4a820 100%);
+  box-shadow: 0 0 30px 12px rgba(230,200,80,0.18), 0 0 60px 20px rgba(230,200,80,0.08);
+  z-index: 1;
+  animation: moonFloat 8s ease-in-out infinite;
+}
+@keyframes moonFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-6px); }
+}
+.skyline { position: absolute; bottom: 33%; z-index: 2; }
+.skyline-china { left: 0; }
+.skyline-karachi { right: 0; transform: scaleX(-1); }
+.horizon {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 35%;
+  z-index: 2;
+  overflow: hidden;
+}
+.wave { position: absolute; width: 250%; left: -75%; border-radius: 40%; }
+.wave1 {
+  bottom: 0; height: 100%;
+  background: linear-gradient(180deg, var(--water2) 0%, var(--water1) 100%);
+  animation: waveScroll 18s linear infinite;
+}
+.wave2 {
+  bottom: 6%; height: 30%;
+  background: rgba(255,255,255,0.035);
+  border-radius: 50%;
+  animation: waveScroll 12s linear infinite reverse;
+}
+.wave3 {
+  bottom: 12%; height: 22%;
+  background: rgba(255,255,255,0.025);
+  border-radius: 50%;
+  animation: waveScroll 9s linear infinite;
+}
+@keyframes waveScroll {
+  from { transform: rotate(0deg) translateX(0); }
+  to   { transform: rotate(360deg) translateX(0); }
+}
+.route-svg {
+  position: absolute;
+  bottom: 33%;
+  left: 0; right: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 3;
+  pointer-events: none;
+}
+.route-path {
+  stroke: rgba(232,160,32,0.45);
+  stroke-width: 1.5;
+  stroke-dasharray: 8 6;
+  fill: none;
+  animation: dashMove 3s linear infinite;
+}
+@keyframes dashMove {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -56; }
+}
+.pin {
+  position: absolute;
+  bottom: 33%;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+.pin-china  { left: 12%; }
+.pin-karachi{ left: 88%; }
+.pin-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 4px rgba(232,160,32,0.25);
+  animation: pingPulse 2s ease-in-out infinite;
+}
+.pin-label {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+}
+@keyframes pingPulse {
+  0%,100% { box-shadow: 0 0 0 4px rgba(232,160,32,0.25); }
+  50%     { box-shadow: 0 0 0 8px rgba(232,160,32,0.0); }
+}
+.ship-wrap {
+  position: absolute;
+  bottom: calc(33% + 2px);
+  z-index: 5;
+  animation: shipSail 22s linear infinite;
+  transform-origin: center bottom;
+}
+@keyframes shipSail {
+  0%   { left: 8%;  }
+  100% { left: 90%; }
+}
+.ship-svg {
+  width: 110px;
+  animation: shipBob 3s ease-in-out infinite;
+}
+@keyframes shipBob {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  25%     { transform: translateY(-3px) rotate(0.5deg); }
+  75%     { transform: translateY(2px) rotate(-0.5deg); }
+}
+.wake {
+  position: absolute;
+  right: 100%;
+  bottom: 4px;
+  width: 60px; height: 8px;
+  background: linear-gradient(to left, rgba(255,255,255,0.18), transparent);
+  border-radius: 0 4px 4px 0;
+  animation: wakeFade 2s ease-out infinite;
+}
+@keyframes wakeFade {
+  0%   { width: 60px; opacity: 0.7; }
+  100% { width: 120px; opacity: 0; }
+}
+.plane-wrap {
+  position: absolute;
+  z-index: 5;
+  top: 14%;
+  animation: planeFly 16s linear infinite;
+}
+@keyframes planeFly {
+  0%   { left: -6%; opacity: 0; }
+  5%   { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 106%; opacity: 0; }
+}
+.plane-svg { width: 44px; }
+nav {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(8,15,28,0.55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo img { height: 44px; width: auto; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 9px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: #f5b030; transform: scale(1.03); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: 0.3s; }
+.hero-content {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px 200px;
+  text-align: center;
+}
+.eyebrow {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(54px, 12vw, 110px);
+  line-height: 0.92;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-title span { color: var(--red); }
+.hero-title em { color: var(--gold); font-style: normal; }
+.hero-sub {
+  font-size: clamp(14px, 2.5vw, 17px);
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.65;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.7s forwards;
+}
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: #b82222; transform: scale(1.03); }
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 13px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.categories {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 12px 16px 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.categories::-webkit-scrollbar { display: none; }
+.cat-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.78);
+  font-family: var(--font-cond);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+.cat-pill:hover {
+  background: rgba(232,160,32,0.18);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.cat-icon { font-size: 15px; }
+.stats-bar {
+  position: relative; z-index: 15;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: rgba(5,12,24,0.7);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 16px 24px;
+  flex-wrap: wrap;
+}
+.stat {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+  padding: 8px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.stat:last-child { border-right: none; }
+.stat-val {
+  font-family: var(--font-head);
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════
+   SHARED LIGHT SECTION STYLES
+══════════════════════════════════════════════ */
+.section-light {
+  background: var(--light-bg);
+  padding: 80px 24px;
+}
+.section-light-alt {
+  background: var(--light-bg2);
+  padding: 80px 24px;
+}
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 6vw, 58px);
+  color: var(--light-text);
+  line-height: 1;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.section-title span { color: var(--red); }
+.section-title em { color: var(--gold); font-style: normal; }
+.section-sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--light-muted);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ══════════════════════════════════════════════
+   PRODUCT CATEGORIES SECTION
+══════════════════════════════════════════════ */
+#categories-section {
+  background: var(--light-bg);
+  padding: 80px 24px;
+}
+.categories-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.cat-card {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.cat-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s;
+}
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(13,27,46,0.12);
+  border-color: rgba(232,160,32,0.4);
+}
+.cat-card:hover::before { transform: scaleX(1); }
+.cat-card-icon {
+  font-size: 36px;
+  line-height: 1;
+}
+.cat-card-name {
+  font-family: var(--font-cond);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--light-text);
+}
+.cat-card-desc {
+  font-size: 13px;
+  color: var(--light-muted);
+  line-height: 1.55;
+}
+.cat-card-arrow {
+  margin-top: auto;
+  font-family: var(--font-cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ══════════════════════════════════════════════
+   OUR SERVICES
+══════════════════════════════════════════════ */
+#services {
+  background: var(--navy);
+  padding: 80px 24px;
+}
+#services .section-title { color: #fff; }
+#services .section-sub { color: var(--muted); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 52px;
+}
+.service-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: background 0.22s, border-color 0.22s, transform 0.22s;
+}
+.service-card:hover {
+  background: rgba(232,160,32,0.07);
+  border-color: rgba(232,160,32,0.35);
+  transform: translateY(-4px);
+}
+.service-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: rgba(232,160,32,0.12);
+  border: 1px solid rgba(232,160,32,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.service-title {
+  font-family: var(--font-cond);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.service-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════════════════ */
+#how-it-works {
+  background: var(--light-bg);
+  padding: 80px 24px;
+}
+.how-header { text-align: center; margin-bottom: 60px; }
+.steps-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0;
+  position: relative;
+}
+.steps-track::before {
+  content: '';
+  position: absolute;
+  top: 36px; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), var(--red));
+  z-index: 0;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--light-card);
+  border: 3px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(232,160,32,0.2);
+  position: relative;
+}
+.step-num::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,160,32,0.25);
+}
+.step-label {
+  font-family: var(--font-cond);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--light-text);
+  margin-bottom: 8px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--light-muted);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════
+   OLD WAY VS OUR WAY
+══════════════════════════════════════════════ */
+#comparison {
+  background: var(--navy);
+  padding: 80px 24px;
+}
+#comparison .section-title { color: #fff; }
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 52px;
+}
+.comp-col {
+  border-radius: 14px;
+  padding: 36px 32px;
+  border: 1px solid transparent;
+}
+.comp-col.old {
+  background: rgba(212,43,43,0.07);
+  border-color: rgba(212,43,43,0.25);
+}
+.comp-col.new {
+  background: rgba(232,160,32,0.07);
+  border-color: rgba(232,160,32,0.3);
+}
+.comp-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.comp-badge {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+.comp-badge.old { background: rgba(212,43,43,0.2); color: #f08080; }
+.comp-badge.new { background: rgba(232,160,32,0.2); color: var(--gold); }
+.comp-heading {
+  font-family: var(--font-head);
+  font-size: 26px;
+  letter-spacing: 0.5px;
+}
+.comp-col.old .comp-heading { color: #f08080; }
+.comp-col.new .comp-heading { color: var(--gold); }
+.comp-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.comp-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.comp-list li .ci {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  margin-top: 1px;
+}
+.comp-col.old .ci { background: rgba(212,43,43,0.2); color: #f08080; }
+.comp-col.new .ci { background: rgba(232,160,32,0.15); color: var(--gold); }
+
+/* ══════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════ */
+#testimonials {
+  background: var(--light-bg);
+  padding: 80px 24px;
+}
+.testimonials-header { text-align: center; margin-bottom: 52px; }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.testimonial-card {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 14px;
+  padding: 32px 28px;
+  position: relative;
+  transition: box-shadow 0.22s, transform 0.22s;
+}
+.testimonial-card:hover {
+  box-shadow: 0 12px 36px rgba(13,27,46,0.1);
+  transform: translateY(-4px);
+}
+.testi-quote {
+  position: absolute;
+  top: 20px; right: 24px;
+  font-family: Georgia, serif;
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(232,160,32,0.15);
+  pointer-events: none;
+}
+.testi-stars {
+  display: flex; gap: 3px; margin-bottom: 16px;
+  color: var(--gold);
+  font-size: 16px;
+}
+.testi-text {
+  font-size: 15px;
+  color: #374558;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--light-border);
+  padding-top: 18px;
+}
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 20px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.testi-name {
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--light-text);
+}
+.testi-role {
+  font-size: 12px;
+  color: var(--light-muted);
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════════
+   CONTACT / CTA
+══════════════════════════════════════════════ */
+#contact {
+  background: var(--light-bg2);
+  padding: 80px 24px;
+}
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.contact-info { padding-top: 8px; }
+.contact-info .section-sub { margin-top: 14px; margin-bottom: 36px; }
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.contact-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.contact-detail-label {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--light-muted);
+  margin-bottom: 4px;
+}
+.contact-detail-val {
+  font-size: 15px;
+  color: var(--light-text);
+  font-weight: 600;
+}
+.contact-form-card {
+  background: var(--light-card);
+  border: 1px solid var(--light-border);
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 8px 32px rgba(13,27,46,0.07);
+}
+.form-title {
+  font-family: var(--font-head);
+  font-size: 28px;
+  color: var(--light-text);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.form-sub {
+  font-size: 14px;
+  color: var(--light-muted);
+  margin-bottom: 28px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.form-group label {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--light-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 11px 14px;
+  border: 1.5px solid var(--light-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--light-text);
+  background: #fafbfd;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(232,160,32,0.12);
+}
+.form-group textarea { min-height: 110px; }
+.form-submit {
+  width: 100%;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+.form-submit:hover { background: #b82222; transform: scale(1.01); }
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer {
+  background: #080f1c;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.footer-top {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.4fr;
+  gap: 48px;
+}
+.footer-brand-logo {
+  font-family: var(--font-head);
+  font-size: 30px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.footer-brand-logo span { color: var(--red); }
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  color: white;
+}
+.footer-social a:hover {
+  background: rgba(232,160,32,0.15);
+  border-color: rgba(232,160,32,0.45);
+  transform: translateY(-2px);
+}
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-badge {
+  font-family: var(--font-cond);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+}
+.footer-col-title {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.footer-col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col-links a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+  display: inline-block;
+}
+.footer-col-links a:hover {
+  color: rgba(255,255,255,0.9);
+  padding-left: 4px;
+}
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.footer-contact-icon {
+  font-size: 17px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.footer-contact-label {
+  font-family: var(--font-cond);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 3px;
+}
+.footer-contact-val {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+.footer-newsletter {
+  margin-top: 4px;
+}
+.footer-newsletter p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.newsletter-form {
+  display: flex;
+  gap: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.newsletter-form input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #fff;
+}
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.25); }
+.newsletter-form button {
+  padding: 10px 16px;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.newsletter-form button:hover { background: #f5b030; }
+.footer-divider {
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+.footer-bottom {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.28);
+}
+.footer-copy a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+.footer-copy a:hover { color: var(--gold); }
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.footer-bottom-links a {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-bottom-links a:hover { color: var(--gold); }
+.footer-flag {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 2px;
+}
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 560px) {
+  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 40px 24px 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-bottom-links { flex-wrap: wrap; gap: 12px; }
+}
+
+/* ══════════════════════════════════════════════
+   SECTION DIVIDER (dark to light)
+══════════════════════════════════════════════ */
+.divider-d2l,
+.divider-l2d,
+.divider-d2lb {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 700px) {
+  nav { padding: 12px 16px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .nav-logo img { height: 36px; }
+  .hero-content { padding: 32px 16px 180px; }
+  .hero-title { letter-spacing: 1px; }
+  .ship-svg { width: 70px; }
+  .plane-svg { width: 30px; }
+  .moon { width: 38px; height: 38px; top: 5%; right: 6%; }
+  .stat { min-width: 80px; padding: 6px 10px; }
+  .stat-val { font-size: 22px; }
+  .stat-label { font-size: 10px; }
+  .categories { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; }
+  .comparison-grid { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .steps-track::before { display: none; }
+}
+@media (max-width: 400px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+
+  <nav>
+    <div class="nav-logo">
+      <img src="/mnt/user-data/uploads/Logo.png" alt="EzyChinaDirect" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span style="display:none; font-family:var(--font-head); font-size:24px; color:var(--gold); letter-spacing:1px;">EzyChinaDirect</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#categories-section">Products</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#testimonials">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+    <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+  </nav>
+
+  <!-- China skyline -->
+  <svg class="skyline skyline-china" width="200" height="90" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="40" width="18" height="50" fill="#0d2244"/>
+    <rect x="12" y="35" width="14" height="10" fill="#0f2a52"/>
+    <rect x="14" y="30" width="10" height="8"  fill="#0f2a52"/>
+    <rect x="32" y="20" width="22" height="70" fill="#0d2244"/>
+    <rect x="34" y="15" width="18" height="8"  fill="#0f2a52"/>
+    <rect x="36" y="10" width="14" height="8"  fill="#0f2a52"/>
+    <rect x="38"  y="5" width="10" height="7"  fill="#0f2a52"/>
+    <rect x="35" y="22" width="3" height="3" fill="#1a4a80" opacity="0.9"/>
+    <rect x="41" y="22" width="3" height="3" fill="#1a4a80" opacity="0.6"/>
+    <rect x="35" y="30" width="3" height="3" fill="#1a4a80"/>
+    <rect x="41" y="30" width="3" height="3" fill="rgba(232,160,32,0.6)"/>
+    <rect x="35" y="38" width="3" height="3" fill="#1a4a80" opacity="0.8"/>
+    <rect x="41" y="38" width="3" height="3" fill="#1a4a80" opacity="0.5"/>
+    <rect x="58" y="30" width="16" height="60" fill="#0d2244"/>
+    <rect x="60" y="26" width="12" height="7"  fill="#0f2a52"/>
+    <rect x="78" y="45" width="14" height="45" fill="#0c1e3c"/>
+    <rect x="96" y="38" width="20" height="52" fill="#0d2244"/>
+    <rect x="98" y="33" width="16" height="8"  fill="#0f2a52"/>
+    <rect x="100" y="28" width="12" height="7" fill="#0f2a52"/>
+    <rect x="102" y="22" width="8"  height="8" fill="#0f2a52"/>
+    <rect x="128" y="20" width="3"  height="70" fill="#0c1e3c"/>
+    <rect x="115" y="20" width="30" height="2.5" fill="#0c1e3c"/>
+    <line x1="128" y1="22" x2="145" y2="40" stroke="#0c1e3c" stroke-width="1.2"/>
+    <text x="6" y="9" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" letter-spacing="2" fill="rgba(232,160,32,0.55)" text-anchor="start">SHANGHAI PORT</text>
+  </svg>
+
+  <!-- Karachi skyline -->
+  <svg class="skyline skyline-karachi" width="200" height="90" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="40" width="18" height="50" fill="#0d2244"/>
+    <rect x="12" y="35" width="14" height="10" fill="#0f2a52"/>
+    <rect x="14" y="30" width="10" height="8"  fill="#0f2a52"/>
+    <rect x="32" y="20" width="22" height="70" fill="#0d2244"/>
+    <rect x="34" y="15" width="18" height="8"  fill="#0f2a52"/>
+    <rect x="36" y="10" width="14" height="8"  fill="#0f2a52"/>
+    <rect x="38"  y="5" width="10" height="7"  fill="#0f2a52"/>
+    <rect x="35" y="22" width="3" height="3" fill="rgba(232,160,32,0.7)"/>
+    <rect x="41" y="22" width="3" height="3" fill="#1a4a80" opacity="0.6"/>
+    <rect x="35" y="30" width="3" height="3" fill="#1a4a80"/>
+    <rect x="41" y="30" width="3" height="3" fill="#1a4a80" opacity="0.9"/>
+    <rect x="35" y="38" width="3" height="3" fill="rgba(232,160,32,0.5)"/>
+    <rect x="41" y="38" width="3" height="3" fill="#1a4a80" opacity="0.5"/>
+    <rect x="58" y="30" width="16" height="60" fill="#0d2244"/>
+    <rect x="60" y="26" width="12" height="7"  fill="#0f2a52"/>
+    <rect x="78" y="45" width="14" height="45" fill="#0c1e3c"/>
+    <rect x="96" y="38" width="20" height="52" fill="#0d2244"/>
+    <rect x="98" y="33" width="16" height="8"  fill="#0f2a52"/>
+    <rect x="100" y="28" width="12" height="7" fill="#0f2a52"/>
+    <rect x="102" y="22" width="8"  height="8" fill="#0f2a52"/>
+    <rect x="128" y="20" width="3"  height="70" fill="#0c1e3c"/>
+    <rect x="115" y="20" width="30" height="2.5" fill="#0c1e3c"/>
+    <line x1="128" y1="22" x2="145" y2="40" stroke="#0c1e3c" stroke-width="1.2"/>
+    <text x="6" y="9" font-family="'Barlow Condensed',sans-serif" font-size="8" font-weight="700" letter-spacing="2" fill="rgba(232,160,32,0.55)" text-anchor="start">KARACHI PORT</text>
+  </svg>
+
+  <!-- Route line -->
+  <svg class="route-svg" viewBox="0 0 1000 60" preserveAspectRatio="none">
+    <path class="route-path" d="M 80 50 Q 500 5 920 50"/>
+  </svg>
+
+  <!-- Pins -->
+  <div class="pin pin-china"><div class="pin-dot"></div><div class="pin-label">Shanghai</div></div>
+  <div class="pin pin-karachi"><div class="pin-dot"></div><div class="pin-label">Karachi</div></div>
+
+  <!-- Ship -->
+  <div class="ship-wrap" id="ship">
+    <div class="wake"></div>
+    <svg class="ship-svg" viewBox="0 0 120 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 34 L8 48 Q60 54 112 48 L116 34 Z" fill="#1a3a6e"/>
+      <path d="M4 34 L116 34 L112 38 L8 38 Z" fill="#d42b2b"/>
+      <rect x="14" y="22" width="92" height="13" rx="1" fill="#1e4080"/>
+      <rect x="18" y="16" width="13" height="8" rx="1" fill="#d42b2b"/>
+      <rect x="33" y="16" width="13" height="8" rx="1" fill="#1a6e3a"/>
+      <rect x="48" y="16" width="13" height="8" rx="1" fill="#1a3a6e"/>
+      <rect x="63" y="16" width="13" height="8" rx="1" fill="#d42b2b"/>
+      <rect x="78" y="16" width="13" height="8" rx="1" fill="#e8a020"/>
+      <rect x="93" y="16" width="11" height="8" rx="1" fill="#1a6e3a"/>
+      <rect x="22" y="9"  width="12" height="8" rx="1" fill="#1a3a6e"/>
+      <rect x="36" y="9"  width="12" height="8" rx="1" fill="#d42b2b"/>
+      <rect x="50" y="9"  width="12" height="8" rx="1" fill="#1a6e3a"/>
+      <rect x="64" y="9"  width="12" height="8" rx="1" fill="#e8a020"/>
+      <rect x="78" y="9"  width="12" height="8" rx="1" fill="#1a3a6e"/>
+      <rect x="86" y="2"  width="22" height="16" rx="2" fill="#243d6e"/>
+      <rect x="88" y="4"  width="8"  height="5"  rx="1" fill="#4a7aaa" opacity="0.8"/>
+      <rect x="98" y="4"  width="8"  height="5"  rx="1" fill="#4a7aaa" opacity="0.5"/>
+      <rect x="100" y="0" width="5"  height="5"  rx="1" fill="#d42b2b"/>
+      <path d="M4 36 Q0 40 4 44" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Plane -->
+  <div class="plane-wrap">
+    <svg class="plane-svg" viewBox="0 0 60 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 14 Q30 8 58 13 Q30 15 2 14Z" fill="#d6dff0"/>
+      <path d="M52 13 L58 14 L52 15Z" fill="#b0bcd0"/>
+      <ellipse cx="48" cy="13" rx="3" ry="1.5" fill="#6ab0e0" opacity="0.8"/>
+      <path d="M28 14 L38 14 L44 22 L26 20Z" fill="#c8d4e8"/>
+      <path d="M28 14 L38 14 L40 6 L26 8Z" fill="#c8d4e8"/>
+      <path d="M8 14 L14 14 L12 20 L6 18Z" fill="#b0bcd0"/>
+      <path d="M8 14 L14 14 L12 8 L6 10Z"  fill="#b0bcd0"/>
+      <ellipse cx="34" cy="19" rx="4" ry="2" fill="#9fb0c8"/>
+      <ellipse cx="34" cy="9"  rx="4" ry="2" fill="#9fb0c8"/>
+    </svg>
+  </div>
+
+  <!-- Horizon / water -->
+  <div class="horizon">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+
+  <!-- Hero copy -->
+  <div class="hero-content">
+    <p class="eyebrow">🇨🇳 China → Pakistan Sourcing Agent</p>
+    <h1 class="hero-title">
+      SOURCE<br><span>SMART.</span><br><em>SHIP FAST.</em>
+    </h1>
+    <p class="hero-sub">
+      We find, verify, and ship quality products directly from Chinese factories to your doorstep in Pakistan — electronics, industrial goods, auto parts, tools, toys &amp; more.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start Sourcing Now</a>
+      <a href="#how-it-works" class="btn-ghost">How It Works →</a>
+    </div>
+  </div>
+
+  <!-- Category pills strip -->
+  <div class="categories">
+    <div class="cat-pill"><span class="cat-icon">🏠</span> Home Goods</div>
+    <div class="cat-pill"><span class="cat-icon">👕</span> Garments & Textiles</div>
+    <div class="cat-pill"><span class="cat-icon">🧸</span> Toys & Games</div>
+    <div class="cat-pill"><span class="cat-icon">🚗</span> Auto Parts</div>
+    <div class="cat-pill"><span class="cat-icon">⚙️</span> Industrial Equipment</div>
+    <div class="cat-pill"><span class="cat-icon">🔧</span> Tools & Hardware</div>
+    <div class="cat-pill"><span class="cat-icon">☀️</span> Renewable Energy</div>
+    <div class="cat-pill"><span class="cat-icon">🏥</span> Medical Supplies</div>
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">500+</div><div class="stat-label">Products Sourced</div></div>
+  <div class="stat"><div class="stat-val">200+</div><div class="stat-label">Happy Clients</div></div>
+  <div class="stat"><div class="stat-val">5000+</div><div class="stat-label">Verified Suppliers</div></div>
+  <div class="stat"><div class="stat-val">98%</div><div class="stat-label">On-Time Delivery</div></div>
+</div>
+
+<!-- ════════════════════════════════
+     PRODUCT CATEGORIES
+════════════════════════════════ -->
+<span class="divider-d2l"></span>
+
+<section id="categories-section" class="section-light">
+  <div class="container">
+    <div class="categories-header">
+      <span class="section-tag">What We Source</span>
+      <h2 class="section-title">Product <span>Categories</span></h2>
+      <p class="section-sub" style="margin: 0 auto;">From everyday consumer goods to heavy industrial equipment — if it's made in China, we can source it for you at factory-direct prices.</p>
+    </div>
+    <div class="categories-grid">
+
+      <div class="cat-card">
+        <div class="cat-card-icon">🏠</div>
+        <div class="cat-card-name">Home Goods</div>
+        <div class="cat-card-desc">Kitchenware, furniture, décor, storage, bedding, and household essentials sourced from China's top manufacturers.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">👕</div>
+        <div class="cat-card-name">Garments & Textiles</div>
+        <div class="cat-card-desc">Ready-made garments, fabrics, uniforms, sportswear, and custom-branded apparel with OEM capability.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">🧸</div>
+        <div class="cat-card-name">Toys & Games</div>
+        <div class="cat-card-desc">Educational toys, board games, outdoor play equipment, action figures, and branded toy lines with safety certifications.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">🚗</div>
+        <div class="cat-card-name">Auto Parts</div>
+        <div class="cat-card-desc">OEM & aftermarket parts, filters, brakes, body kits, tyres, batteries, and accessories for all major vehicle brands.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">⚙️</div>
+        <div class="cat-card-name">Industrial Equipment</div>
+        <div class="cat-card-desc">CNC machines, compressors, welding systems, conveyor belts, and heavy-duty manufacturing machinery.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">🔧</div>
+        <div class="cat-card-name">Tools & Hardware</div>
+        <div class="cat-card-desc">Hand tools, power tools, fasteners, safety equipment, and workshop gear for trade and retail markets.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">☀️</div>
+        <div class="cat-card-name">Renewable Energy & Power Solutions</div>
+        <div class="cat-card-desc">Solar panels, inverters, lithium batteries, EV charging units, and off-grid energy systems from certified factories.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+      <div class="cat-card">
+        <div class="cat-card-icon">🏥</div>
+        <div class="cat-card-name">Medical Supplies</div>
+        <div class="cat-card-desc">Disposable PPE, diagnostic equipment, hospital furniture, surgical instruments, and FDA/CE certified medical devices.</div>
+        <div class="cat-card-arrow">Explore <span>→</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     OUR SERVICES
+════════════════════════════════ -->
+<span class="divider-l2d"></span>
+
+<section id="services" style="background: var(--navy); padding: 80px 24px;">
+  <div class="container">
+    <span class="section-tag" style="color: var(--gold);">What We Do</span>
+    <h2 class="section-title" style="color:#fff;">Our <em>Services</em></h2>
+    <p class="section-sub">End-to-end sourcing and logistics — we handle every step from factory floor to your warehouse door.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <div class="service-title">Product Sourcing</div>
+        <div class="service-desc">Tell us what you need and we'll identify the best-matched factories in China, verify their legitimacy, and get you competitive quotes within 48 hours.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏭</div>
+        <div class="service-title">Factory Verification</div>
+        <div class="service-desc">We visit or video-audit factories on your behalf, verify business licences, production capacity, and certifications before you commit a single rupee.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <div class="service-title">Price Negotiation</div>
+        <div class="service-desc">Our China-based team negotiates in Mandarin to secure rock-bottom FOB prices, favorable payment terms, and MOQ flexibility for Pakistani buyers.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔬</div>
+        <div class="service-title">Quality Inspection</div>
+        <div class="service-desc">Pre-shipment inspections by our QC team ensure every batch meets your specs. We catch defects before they leave the factory — not after they reach you.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚢</div>
+        <div class="service-title">Freight & Logistics</div>
+        <div class="service-desc">Sea freight, air cargo, and express courier options. We handle booking, container loading, marine insurance, and door-to-door delivery to any city in Pakistan.</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <div class="service-title">Customs Clearance</div>
+        <div class="service-desc">Full documentation support — commercial invoices, packing lists, COO, HS code classification, and clearing agents at Karachi, Lahore Dry Port, and Islamabad.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════ -->
+<span class="divider-d2l"></span>
+
+<section id="how-it-works" class="section-light">
+  <div class="container">
+    <div class="how-header">
+      <span class="section-tag">Simple Process</span>
+      <h2 class="section-title">How It <span>Works</span></h2>
+      <p class="section-sub" style="margin: 0 auto;">We've simplified China sourcing into 6 clear steps. You focus on your business — we handle the rest.</p>
+    </div>
+
+    <div class="steps-track">
+
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-label">Tell Us What You Need</div>
+        <div class="step-desc">Fill out our sourcing form with product details, specs, quantity, and target price.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-label">We Find Suppliers</div>
+        <div class="step-desc">Our team shortlists verified Chinese factories and shares a supplier comparison report within 48 hrs.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-label">Samples & Approval</div>
+        <div class="step-desc">We arrange product samples to be shipped to you or inspected locally before mass production.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-label">Production & QC</div>
+        <div class="step-desc">Once you approve, production begins. Our QC team inspects finished goods before packing.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-label">Shipment & Tracking</div>
+        <div class="step-desc">We book freight, handle export docs, and give you real-time tracking from Shanghai to Karachi.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">06</div>
+        <div class="step-label">Delivery to Your Door</div>
+        <div class="step-desc">Customs cleared, duties paid, goods delivered to your warehouse or business address in Pakistan.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     OLD WAY VS OUR WAY
+════════════════════════════════ -->
+<span class="divider-l2d"></span>
+
+<section id="comparison" style="background: var(--navy); padding: 80px 24px;">
+  <div class="container">
+    <span class="section-tag" style="color: var(--gold);">The Difference</span>
+    <h2 class="section-title" style="color:#fff;">Old Way <em>vs</em> Our Way</h2>
+
+    <div class="comparison-grid">
+
+      <div class="comp-col old">
+        <div class="comp-header">
+          <div class="comp-badge old">Old Way</div>
+          <div class="comp-heading">Buying Blind</div>
+        </div>
+        <ul class="comp-list">
+          <li><span class="ci">✕</span> Browse Alibaba alone with no way to verify supplier legitimacy</li>
+          <li><span class="ci">✕</span> Language barriers mean you get misquoted or misunderstood</li>
+          <li><span class="ci">✕</span> No quality check — goods arrive damaged or wrong specification</li>
+          <li><span class="ci">✕</span> Stuck coordinating freight, insurance, and customs yourself</li>
+          <li><span class="ci">✕</span> Hidden port charges and surprise customs duties blow your budget</li>
+          <li><span class="ci">✕</span> Long delays with zero visibility — no one to call when your shipment stalls</li>
+          <li><span class="ci">✕</span> Minimum orders too high, capital tied up in risky first orders</li>
+        </ul>
+      </div>
+
+      <div class="comp-col new">
+        <div class="comp-header">
+          <div class="comp-badge new">Our Way</div>
+          <div class="comp-heading">Sourcing Done Right</div>
+        </div>
+        <ul class="comp-list">
+          <li><span class="ci">✓</span> Every supplier audited and verified by our China-based team</li>
+          <li><span class="ci">✓</span> Native Mandarin negotiators secure the best prices and terms for you</li>
+          <li><span class="ci">✓</span> Pre-shipment QC inspection with full photo/video report before dispatch</li>
+          <li><span class="ci">✓</span> We handle freight, insurance, and customs end-to-end — one invoice</li>
+          <li><span class="ci">✓</span> Transparent cost breakdown with no hidden fees or surprise charges</li>
+          <li><span class="ci">✓</span> Real-time shipment tracking and a dedicated account manager on WhatsApp</li>
+          <li><span class="ci">✓</span> MOQ negotiation support — start small, scale when confident</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════ -->
+<span class="divider-d2l"></span>
+
+<section id="testimonials" class="section-light">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="section-tag">Client Stories</span>
+      <h2 class="section-title">What Our <span>Clients</span> Say</h2>
+      <p class="section-sub" style="margin: 0 auto;">Hundreds of Pakistani importers trust EzyChinaDirect to grow their businesses. Here's what they have to say.</p>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Before EzyChinaDirect, I wasted months on Alibaba dealing with scam suppliers. They found me a verified solar inverter factory and handled everything door-to-door. My first container landed in Karachi flawlessly.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #d42b2b, #8b1515);">AK</div>
+          <div>
+            <div class="testi-name">Asif Karim</div>
+            <div class="testi-role">Solar Energy Distributor, Lahore</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I needed OEM auto parts for a chain of workshops. EzyChinaDirect negotiated 30% below Alibaba listed prices, arranged QC inspection, and delivered in 28 days. Game-changer for my business margins.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #0d5c2e, #07391c);">MR</div>
+          <div>
+            <div class="testi-name">Muhammad Raza</div>
+            <div class="testi-role">Auto Parts Importer, Karachi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">We source garments and home textiles every season. Their team sends us inspection videos before every shipment — I feel completely in control without stepping foot in China. Highly recommended!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #e8a020, #a06810);">SN</div>
+          <div>
+            <div class="testi-name">Sara Niazi</div>
+            <div class="testi-role">Fashion Retailer, Islamabad</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Imported industrial CNC machines for our factory. The customs clearance alone would have taken me weeks. EzyChinaDirect cleared everything in 3 days at Lahore Dry Port. Exceptional service.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #1a3a9e, #0d2060);">TQ</div>
+          <div>
+            <div class="testi-name">Tariq Qureshi</div>
+            <div class="testi-role">Factory Owner, Faisalabad</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I run a toy wholesale business. Their team found me three alternative toy factories, negotiated down MOQs for my small budget, and the products are flying off the shelves. Couldn't be happier.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #6b2d8b, #3f1a54);">HA</div>
+          <div>
+            <div class="testi-name">Hina Arshad</div>
+            <div class="testi-role">Toy Wholesaler, Rawalpindi</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Medical equipment sourcing used to terrify me — fake certifications everywhere. EzyChinaDirect verified FDA/CE documentation before we paid a single rupee. We now import regularly with full confidence.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #0e7a6c, #095248);">ZH</div>
+          <div>
+            <div class="testi-name">Dr. Zafar Hussain</div>
+            <div class="testi-role">Medical Supplies Importer, Peshawar</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CONTACT / GET A QUOTE
+════════════════════════════════ -->
+<span class="divider-l2d"></span>
+
+<section id="contact" class="section-light-alt">
+  <div class="container">
+    <div class="contact-wrap">
+
+      <div class="contact-info">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Start <em>Sourcing</em><br><span>Today</span></h2>
+        <p class="section-sub">Tell us what you want to import and our team will come back to you within 24 hours with a free sourcing plan and cost estimate.</p>
+
+        <div style="margin-top: 36px;">
+          <div class="contact-detail">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-detail-label">WhatsApp</div>
+              <div class="contact-detail-val">+92 300 000 0000</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-val">info@ezychinадирект.com</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-detail-label">Pakistan Office</div>
+              <div class="contact-detail-val">Karachi · Lahore · Islamabad</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">🇨🇳</div>
+            <div>
+              <div class="contact-detail-label">China Office</div>
+              <div class="contact-detail-val">Yiwu · Guangzhou · Shenzhen</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust badges -->
+        <div style="margin-top: 36px; padding: 24px; background: #fff; border-radius: 12px; border: 1px solid var(--light-border);">
+          <div style="font-family: var(--font-cond); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--light-muted); margin-bottom: 14px;">Why Trust Us</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--light-text);">
+              <span style="color: var(--gold); font-size: 18px;">✓</span> 5+ years sourcing China → Pakistan
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--light-text);">
+              <span style="color: var(--gold); font-size: 18px;">✓</span> Registered business in Pakistan & China
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--light-text);">
+              <span style="color: var(--gold); font-size: 18px;">✓</span> 200+ happy repeat clients
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--light-text);">
+              <span style="color: var(--gold); font-size: 18px;">✓</span> No upfront fee until you approve a supplier
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact-form-card">
+        <div class="form-title">Request a Free Quote</div>
+        <div class="form-sub">Fill in your details and we'll get back to you within 24 hours.</div>
+
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" placeholder="Ahmed">
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" placeholder="Khan">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="ahmed@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">WhatsApp / Phone</label>
+            <input type="tel" id="phone" placeholder="+92 300 0000000">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Product Category</label>
+            <select id="category">
+              <option value="">— Select a category —</option>
+              <option>Home Goods</option>
+              <option>Garments & Textiles</option>
+              <option>Toys & Games</option>
+              <option>Auto Parts</option>
+              <option>Industrial Equipment</option>
+              <option>Tools & Hardware</option>
+              <option>Renewable Energy & Power Solutions</option>
+              <option>Medical Supplies</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Product Details & Requirements</label>
+            <textarea id="message" placeholder="Describe the product you want to source — specifications, quantity, target price, delivery city, etc."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">🚢 Send My Sourcing Request</button>
+        </form>
+
+        <div id="form-success" style="display:none; margin-top: 16px; padding: 16px; background: rgba(14,100,50,0.1); border: 1px solid rgba(14,100,50,0.3); border-radius: 8px; text-align: center; font-family: var(--font-cond); font-weight: 600; letter-spacing: 0.5px; color: #0a7a3c;">
+          ✅ Request Received! We'll contact you within 24 hours.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer>
+
+  <!-- Top grid -->
+  <div class="footer-top">
+
+    <!-- Brand column -->
+    <div>
+      <div class="footer-brand-logo">Ezy<span>China</span>Direct</div>
+      <p class="footer-tagline">Pakistan's most trusted China sourcing agent. We find, verify, and ship factory-direct products straight to your door.</p>
+      <div class="footer-social">
+        <a href="#" title="WhatsApp">💬</a>
+        <a href="#" title="Facebook">📘</a>
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="LinkedIn">💼</a>
+        <a href="#" title="YouTube">▶️</a>
+      </div>
+      <div class="footer-badges">
+        <span class="footer-badge">🇨🇳 China Office</span>
+        <span class="footer-badge">🇵🇰 Pakistan Office</span>
+        <span class="footer-badge">✅ Verified Supplier Network</span>
+        <span class="footer-badge">🔒 Secure Payments</span>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-col-links">
+        <li><a href="#categories-section">Product Categories</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#comparison">Why Choose Us</a></li>
+        <li><a href="#testimonials">Client Stories</a></li>
+        <li><a href="#contact">Get a Free Quote</a></li>
+      </ul>
+    </div>
+
+    <!-- Products -->
+    <div>
+      <div class="footer-col-title">We Source</div>
+      <ul class="footer-col-links">
+        <li><a href="#">🏠 Home Goods</a></li>
+        <li><a href="#">👕 Garments & Textiles</a></li>
+        <li><a href="#">🧸 Toys & Games</a></li>
+        <li><a href="#">🚗 Auto Parts</a></li>
+        <li><a href="#">⚙️ Industrial Equipment</a></li>
+        <li><a href="#">🔧 Tools & Hardware</a></li>
+        <li><a href="#">☀️ Renewable Energy</a></li>
+        <li><a href="#">🏥 Medical Supplies</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact + Newsletter -->
+    <div>
+      <div class="footer-col-title">Contact Us</div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">💬</div>
+        <div>
+          <div class="footer-contact-label">WhatsApp</div>
+          <div class="footer-contact-val">+92 300 000 0000</div>
+        </div>
+      </div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">📧</div>
+        <div>
+          <div class="footer-contact-label">Email</div>
+          <div class="footer-contact-val">info@ezychinадирект.com</div>
+        </div>
+      </div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">📍</div>
+        <div>
+          <div class="footer-contact-label">Pakistan Offices</div>
+          <div class="footer-contact-val">Karachi · Lahore · Islamabad</div>
+        </div>
+      </div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">🇨🇳</div>
+        <div>
+          <div class="footer-contact-label">China Offices</div>
+          <div class="footer-contact-val">Yiwu · Guangzhou · Shenzhen</div>
+        </div>
+      </div>
+
+      <div class="footer-contact-item">
+        <div class="footer-contact-icon">⏰</div>
+        <div>
+          <div class="footer-contact-label">Business Hours</div>
+          <div class="footer-contact-val">Mon – Sat, 9 AM – 7 PM PKT</div>
+        </div>
+      </div>
+
+      <div class="footer-newsletter" style="margin-top: 20px;">
+        <div class="footer-col-title" style="margin-bottom: 8px;">Stay Updated</div>
+        <p>Get sourcing tips, supplier alerts & trade updates.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="footer-divider"></div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-copy">
+      © 2025 EzyChinaDirect. All rights reserved. Built with ❤️ for Pakistani importers. &nbsp;|&nbsp;
+      <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a>
+    </div>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Sitemap</a></li>
+      <li><a href="#">Refund Policy</a></li>
+      <li><a href="#">Shipping Policy</a></li>
+      <li><a href="#">FAQ</a></li>
+    </ul>
+    <div class="footer-flag">🇨🇳 → 🇵🇰</div>
+  </div>
+
+</footer>
+
+<script>
+  // ── Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 90; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `
+      left: ${Math.random()*100}%;
+      top:  ${Math.random()*62}%;
+      width: ${size}px;
+      height: ${size}px;
+      --d: ${(Math.random()*4+1.5).toFixed(1)}s;
+      --op1: ${(Math.random()*0.5+0.4).toFixed(2)};
+      --op2: ${(Math.random()*0.2).toFixed(2)};
+      animation-delay: ${(Math.random()*5).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ── Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.style.display = 'none';
+  }
+
+  // ── Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
