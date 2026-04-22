@@ -2426,12 +2426,61 @@ footer {
         <div class="calc-cta-block">
           <div class="calc-cta-headline">Get Your <strong>Accurate Quote</strong> in 24h</div>
           <p class="calc-cta-sub">Our team will verify exact freight rates, duties, and supplier pricing — no guesswork.</p>
-          <a href="#contact" class="calc-cta-btn">🚀 Get Exact Quote Now</a>
+          <button class="calc-cta-btn" onclick="calcShowQuoteForm()">🚀 Get Exact Quote Now</button>
           <div class="calc-trust-row">
             <span class="calc-trust-pill">✅ Free Consultation</span>
             <span class="calc-trust-pill">⚡ 24h Response</span>
             <span class="calc-trust-pill">🔒 No Obligation</span>
           </div>
+        </div>
+
+        <!-- Inline Quote Form (hidden until button click) -->
+        <div class="calc-quote-form" id="calc-quote-form">
+          <div class="calc-quote-form-header">
+            <span class="calc-quote-form-icon">📋</span>
+            <div>
+              <div class="calc-quote-form-title">Your Quote Request</div>
+              <div class="calc-quote-form-sub">We'll reply within 24 hours to <strong>info@ezychinadirect.online</strong></div>
+            </div>
+            <button class="calc-quote-close" onclick="calcHideQuoteForm()" title="Close">✕</button>
+          </div>
+
+          <div class="calc-quote-fields">
+            <div class="calc-qf-row">
+              <div class="calc-qf-group">
+                <label class="calc-qf-label">Full Name *</label>
+                <input class="calc-qf-input" id="qf-name" type="text" placeholder="Ahmed Khan">
+              </div>
+              <div class="calc-qf-group">
+                <label class="calc-qf-label">Mobile / WhatsApp *</label>
+                <input class="calc-qf-input" id="qf-mobile" type="tel" placeholder="+92 300 0000000">
+              </div>
+            </div>
+            <div class="calc-qf-group">
+              <label class="calc-qf-label">Email Address *</label>
+              <input class="calc-qf-input" id="qf-email" type="email" placeholder="ahmed@example.com">
+            </div>
+            <div class="calc-qf-group">
+              <label class="calc-qf-label">Product Name *</label>
+              <input class="calc-qf-input" id="qf-product" type="text" placeholder="e.g. Premium Smartwatch, Mini Projector…">
+            </div>
+            <div class="calc-qf-group">
+              <label class="calc-qf-label">Product Details & Requirements</label>
+              <textarea class="calc-qf-input calc-qf-textarea" id="qf-details" placeholder="Describe specs, quantity, target price, delivery city, any other requirements…"></textarea>
+            </div>
+
+          </div>
+
+          <div class="calc-quote-summary" id="calc-quote-summary"></div>
+
+          <button class="calc-quote-submit" id="calc-quote-submit" onclick="calcSendQuote()">
+            <span id="calc-submit-label">📨 Send My Quote Request</span>
+          </button>
+
+          <div class="calc-quote-success" id="calc-quote-success">
+            ✅ Request sent! We'll get back to you within 24 hours.
+          </div>
+          <div class="calc-quote-error" id="calc-quote-error"></div>
         </div>
 
       </div>
@@ -2738,9 +2787,281 @@ footer {
   .calc-inputs-panel, .calc-results-panel { padding: 22px 18px; }
   .calc-ship-tabs { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── Inline Quote Form ── */
+.calc-cta-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+.calc-quote-form {
+  display: none;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(232,160,32,0.3);
+  border-radius: 14px;
+  padding: 24px 22px;
+  animation: calcFormSlideIn 0.35s ease forwards;
+}
+@keyframes calcFormSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.calc-quote-form.visible { display: block; }
+
+.calc-quote-form-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.calc-quote-form-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.calc-quote-form-title {
+  font-family: var(--font-cond);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.calc-quote-form-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+.calc-quote-form-sub strong { color: rgba(255,255,255,0.65); }
+.calc-quote-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.35);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.calc-quote-close:hover { color: #fff; background: rgba(255,255,255,0.08); }
+
+.calc-quote-fields { display: flex; flex-direction: column; gap: 14px; }
+.calc-qf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.calc-qf-group { display: flex; flex-direction: column; gap: 6px; }
+.calc-qf-label {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.calc-qf-input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+.calc-qf-input::placeholder { color: rgba(255,255,255,0.2); }
+.calc-qf-input:focus { border-color: var(--gold); background: rgba(232,160,32,0.07); }
+.calc-qf-textarea { resize: vertical; min-height: 90px; }
+
+.calc-quote-summary {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: rgba(232,160,32,0.07);
+  border: 1px solid rgba(232,160,32,0.18);
+  border-radius: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  font-family: var(--font-body);
+  display: none;
+}
+.calc-quote-summary.has-data { display: block; }
+.calc-quote-summary strong { color: var(--gold-light); }
+
+.calc-quote-submit {
+  margin-top: 16px;
+  width: 100%;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-cond);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+}
+.calc-quote-submit:hover { background: #f5b030; transform: scale(1.01); }
+.calc-quote-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.calc-quote-success {
+  display: none;
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(14,100,50,0.15);
+  border: 1px solid rgba(14,100,50,0.35);
+  border-radius: 8px;
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 600;
+  color: #4ade80;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+.calc-quote-error {
+  display: none;
+  margin-top: 10px;
+  padding: 12px 14px;
+  background: rgba(212,43,43,0.12);
+  border: 1px solid rgba(212,43,43,0.3);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #fca5a5;
+  text-align: center;
+}
+
+/* ── File Upload ── */
+.calc-qf-optional {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+}
+.calc-file-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1.5px dashed rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: center;
+  position: relative;
+}
+.calc-file-drop:hover,
+.calc-file-drop.drag-over {
+  border-color: var(--gold);
+  background: rgba(232,160,32,0.06);
+}
+.calc-file-drop input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.calc-file-icon { font-size: 24px; line-height: 1; }
+.calc-file-text {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.3px;
+}
+.calc-file-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  font-family: var(--font-body);
+}
+.calc-file-preview {
+  display: none;
+  margin-top: 10px;
+  align-items: center;
+  gap: 10px;
+  background: rgba(232,160,32,0.08);
+  border: 1px solid rgba(232,160,32,0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.calc-file-preview.visible { display: flex; }
+.calc-file-preview-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.calc-file-preview-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.calc-file-preview-info { flex: 1; min-width: 0; }
+.calc-file-preview-name {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.calc-file-preview-size {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+.calc-file-remove {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.calc-file-remove:hover { color: #fca5a5; }
+
+@media (max-width: 540px) {
+  .calc-qf-row { grid-template-columns: 1fr; }
+}
 </style>
 
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ════════════════════════════════════════════
+// EMAILJS SETUP
+// 1. Sign up free at https://www.emailjs.com
+// 2. Create a service (Gmail recommended) → copy Service ID below
+// 3. Create an email template → copy Template ID below
+//    Template variables used: {{from_name}}, {{from_email}}, {{mobile}},
+//    {{product_name}}, {{details}}, {{calc_summary}}, {{has_attachment}}, {{attachment_name}}
+//    For file attachment: in EmailJS template, add an "Attachment" field with value {{my_file}}
+// 4. Copy your Public Key below
+// ════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
 // ── Sourcing Cost Calculator Logic
 let calcShipMode = 'sea';
 
@@ -2756,6 +3077,9 @@ function calcFmt(n) {
   return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
+// Stores last computed values for attaching to email
+let calcSnapshot = null;
+
 function calcUpdate() {
   const unitCost = parseFloat(document.getElementById('calc-unit-cost').value) || 0;
   const qty      = parseFloat(document.getElementById('calc-qty').value) || 0;
@@ -2767,21 +3091,17 @@ function calcUpdate() {
       document.getElementById(id).textContent = '—';
     });
     document.getElementById('calc-savings').style.display = 'none';
+    calcSnapshot = null;
+    updateQuoteSummary();
     return;
   }
 
   const productCost = unitCost * qty;
-
-  // Shipping estimate: sea ~$1.20/kg (min $60), air ~$4.50/kg (min $80)
   const seaRate = Math.max(weight * 1.20, 60);
   const airRate = Math.max(weight * 4.50, 80);
   const shippingCost = calcShipMode === 'sea' ? seaRate : airRate;
-
   const duties = (productCost + shippingCost) * (dutyPct / 100);
-
-  // Agent fee: 5% of product cost, min $50
   const agentFee = Math.max(productCost * 0.05, 50);
-
   const total = productCost + shippingCost + duties + agentFee;
   const perUnit = qty > 0 ? total / qty : 0;
 
@@ -2792,18 +3112,153 @@ function calcUpdate() {
   document.getElementById('res-total').textContent    = calcFmt(total);
   document.getElementById('res-per-unit').textContent = '$' + perUnit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  // Show savings badge only when showing air mode or switch comparison
   const savingsBadge = document.getElementById('calc-savings');
   const savings = airRate - seaRate;
   if (savings > 0 && calcShipMode === 'air') {
     document.getElementById('calc-savings-amt').textContent = calcFmt(savings);
     savingsBadge.style.display = 'flex';
   } else if (savings > 0 && calcShipMode === 'sea') {
-    document.getElementById('calc-savings-amt').textContent = calcFmt(savings);
     savingsBadge.querySelector('.calc-savings-title').innerHTML = 'Switching to sea saves you <span id="calc-savings-amt">' + calcFmt(savings) + '</span>';
     savingsBadge.style.display = 'flex';
   } else {
     savingsBadge.style.display = 'none';
+  }
+
+  // Save snapshot for email
+  calcSnapshot = {
+    unitCost, qty, weight, dutyPct,
+    shippingMode: calcShipMode === 'sea' ? 'Sea Freight' : 'Air Freight',
+    productCost: calcFmt(productCost),
+    shipping: calcFmt(shippingCost),
+    duties: calcFmt(duties),
+    agentFee: calcFmt(agentFee),
+    total: calcFmt(total),
+    perUnit: '$' + perUnit.toFixed(2)
+  };
+  updateQuoteSummary();
+}
+
+let calcAttachment = null;
+
+// ── Show/hide inline quote form
+function calcShowQuoteForm() {
+  const form = document.getElementById('calc-quote-form');
+  form.classList.add('visible');
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  updateQuoteSummary();
+}
+function calcHideQuoteForm() {
+  document.getElementById('calc-quote-form').classList.remove('visible');
+}
+
+// ── Update the calculator summary shown inside the form
+function updateQuoteSummary() {
+  const el = document.getElementById('calc-quote-summary');
+  if (!el) return;
+  if (!calcSnapshot) {
+    el.classList.remove('has-data');
+    return;
+  }
+  const s = calcSnapshot;
+  el.innerHTML =
+    `<strong>📊 Your Calculator Estimate</strong><br>` +
+    `Unit Cost: ${s.unitCost} × ${s.qty} units &nbsp;|&nbsp; Shipping: ${s.shippingMode}<br>` +
+    `Product: <strong>${s.productCost}</strong> &nbsp;+&nbsp; Freight: <strong>${s.shipping}</strong> &nbsp;+&nbsp; Duties: <strong>${s.duties}</strong> &nbsp;+&nbsp; Agent Fee: <strong>${s.agentFee}</strong><br>` +
+    `<strong style="color:var(--gold-light)">Estimated Total: ${s.total} &nbsp;|&nbsp; Per Unit: ${s.perUnit}</strong>`;
+  el.classList.add('has-data');
+}
+
+// ── Send quote via EmailJS
+async function calcSendQuote() {
+  const name    = document.getElementById('qf-name').value.trim();
+  const mobile  = document.getElementById('qf-mobile').value.trim();
+  const email   = document.getElementById('qf-email').value.trim();
+  const product = document.getElementById('qf-product').value.trim();
+  const details = document.getElementById('qf-details').value.trim();
+
+  const errEl  = document.getElementById('calc-quote-error');
+  const succEl = document.getElementById('calc-quote-success');
+  errEl.style.display = 'none';
+  succEl.style.display = 'none';
+
+  // Basic validation
+  if (!name || !mobile || !email || !product) {
+    errEl.textContent = '⚠️ Please fill in all required fields (Name, Mobile, Email, Product Name).';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = '⚠️ Please enter a valid email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('calc-quote-submit');
+  const labelEl = document.getElementById('calc-submit-label');
+  btn.disabled = true;
+  labelEl.textContent = '⏳ Sending…';
+
+  const calcSummary = calcSnapshot
+    ? `Unit Cost: $${calcSnapshot.unitCost} × ${calcSnapshot.qty} units | Shipping: ${calcSnapshot.shippingMode} | Product Total: ${calcSnapshot.productCost} | Freight: ${calcSnapshot.shipping} | Duties: ${calcSnapshot.duties} | Agent Fee: ${calcSnapshot.agentFee} | TOTAL: ${calcSnapshot.total} | Per Unit: ${calcSnapshot.perUnit}`
+    : 'No calculator data entered.';
+
+  // Build params — attach file as base64 if present
+  const emailParams = {
+    to_email:     'info@ezychinadirect.online',
+    from_name:    name,
+    from_email:   email,
+    mobile:       mobile,
+    product_name: product,
+    details:      details || '(no details provided)',
+    calc_summary: calcSummary,
+    reply_to:     email,
+    has_attachment: calcAttachment ? 'Yes' : 'No',
+    attachment_name: calcAttachment ? calcAttachment.name : 'None'
+  };
+
+  // EmailJS supports sending files via the sendForm method or by passing
+  // the file input element directly. We use the form-element approach.
+  const fileInput = document.getElementById('qf-file');
+  let sendPromise;
+  if (calcAttachment && fileInput.files[0]) {
+    // Build a temporary hidden form so EmailJS can attach the file
+    const tempForm = document.createElement('form');
+    tempForm.style.display = 'none';
+    Object.entries(emailParams).forEach(([k, v]) => {
+      const inp = document.createElement('input');
+      inp.name = k; inp.value = v;
+      tempForm.appendChild(inp);
+    });
+    // Clone the file input into the temp form (EmailJS needs it named "my_file" by default,
+    // but you can configure the template attachment variable name in EmailJS dashboard)
+    const fileClone = fileInput.cloneNode(true);
+    fileClone.name = 'my_file';
+    tempForm.appendChild(fileClone);
+    document.body.appendChild(tempForm);
+    sendPromise = emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, tempForm)
+      .finally(() => document.body.removeChild(tempForm));
+  } else {
+    sendPromise = emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams);
+  }
+
+  try {
+    await sendPromise;
+
+    succEl.style.display = 'block';
+    labelEl.textContent = '✅ Sent!';
+    // Reset form fields
+    ['qf-name','qf-mobile','qf-email','qf-product','qf-details'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('calc-quote-summary').classList.remove('has-data');
+    calcRemoveFile();
+
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    errEl.textContent = '❌ Could not send. Please email us directly at info@ezychinadirect.online';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    labelEl.textContent = '📨 Send My Quote Request';
   }
 }
 </script>
@@ -3304,7 +3759,7 @@ function calcUpdate() {
             <div class="contact-icon">📧</div>
             <div>
               <div class="contact-detail-label">Email</div>
-              <div class="contact-detail-val">info@ezychinадирект.com</div>
+              <div class="contact-detail-val">info@ezychinadirect.online</div>
             </div>
           </div>
           <div class="contact-detail">
@@ -3490,7 +3945,7 @@ function calcUpdate() {
         <div class="footer-contact-icon">📧</div>
         <div>
           <div class="footer-contact-label">Email</div>
-          <div class="footer-contact-val">info@ezychinадирект.com</div>
+          <div class="footer-contact-val">info@ezychinadirect.online</div>
         </div>
       </div>
 
