@@ -2310,6 +2310,504 @@ footer {
   </div>
 </section>
 
+<!-- ════════════════════════════════
+     SOURCING COST CALCULATOR
+════════════════════════════════ -->
+<section id="calculator" class="calc-section">
+  <div class="container">
+
+    <div class="calc-header">
+      <span class="section-tag">🧮 Free Tool</span>
+      <h2 class="section-title">Sourcing <em>Cost Calculator</em></h2>
+      <p class="section-sub">Estimate your total import cost before you commit — product, shipping, duties, and our fee, all in one place.</p>
+    </div>
+
+    <div class="calc-layout">
+
+      <!-- LEFT: Inputs -->
+      <div class="calc-inputs-panel">
+
+        <div class="calc-group">
+          <label class="calc-label">Product Cost Per Unit (USD)</label>
+          <div class="calc-input-wrap">
+            <span class="calc-prefix">$</span>
+            <input class="calc-input" id="calc-unit-cost" type="number" min="0" step="0.01" placeholder="e.g. 12.00" oninput="calcUpdate()">
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Order Quantity (Units)</label>
+          <div class="calc-input-wrap">
+            <input class="calc-input" id="calc-qty" type="number" min="1" step="1" placeholder="e.g. 200" style="padding-left:16px;" oninput="calcUpdate()">
+            <span class="calc-suffix">units</span>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Shipping Method</label>
+          <div class="calc-ship-tabs">
+            <button class="calc-ship-tab active" data-mode="sea" onclick="calcSetShip(this,'sea')">
+              <span class="calc-ship-icon">🚢</span>
+              <span class="calc-ship-name">Sea Freight</span>
+              <span class="calc-ship-note">~25–35 days</span>
+            </button>
+            <button class="calc-ship-tab" data-mode="air" onclick="calcSetShip(this,'air')">
+              <span class="calc-ship-icon">✈️</span>
+              <span class="calc-ship-name">Air Freight</span>
+              <span class="calc-ship-note">~5–10 days</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Estimated Weight (kg)</label>
+          <div class="calc-input-wrap">
+            <input class="calc-input" id="calc-weight" type="number" min="0" step="0.1" placeholder="e.g. 50" style="padding-left:16px;" oninput="calcUpdate()">
+            <span class="calc-suffix">kg</span>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Import Duty Rate <span class="calc-label-hint">(Pakistan avg. 10–20%)</span></label>
+          <div class="calc-input-wrap">
+            <input class="calc-input" id="calc-duty" type="number" min="0" max="100" step="0.5" placeholder="e.g. 15" style="padding-left:16px;" oninput="calcUpdate()">
+            <span class="calc-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="calc-disclaimer">
+          <span>⚠️</span> Estimates only. Actual costs depend on product type, supplier location & current freight rates. Get an exact quote from our team.
+        </div>
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div class="calc-results-panel">
+
+        <div class="calc-results-header">Your Estimated Import Cost</div>
+
+        <div class="calc-result-rows">
+          <div class="calc-result-row">
+            <span class="calc-result-label">📦 Product Cost</span>
+            <span class="calc-result-val" id="res-product">—</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label" id="res-ship-label">🚢 Sea Freight</span>
+            <span class="calc-result-val" id="res-shipping">—</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">🏛️ Duties & Taxes</span>
+            <span class="calc-result-val" id="res-duties">—</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">🤝 Agent Fee <span class="calc-result-label-sub">(included)</span></span>
+            <span class="calc-result-val" id="res-agent">—</span>
+          </div>
+          <div class="calc-result-divider"></div>
+          <div class="calc-result-row total">
+            <span class="calc-result-label">💰 Total Landed Cost</span>
+            <span class="calc-result-val total" id="res-total">—</span>
+          </div>
+          <div class="calc-result-row secondary">
+            <span class="calc-result-label">📊 Cost Per Unit (landed)</span>
+            <span class="calc-result-val secondary" id="res-per-unit">—</span>
+          </div>
+        </div>
+
+        <!-- Savings badge -->
+        <div class="calc-savings-badge" id="calc-savings" style="display:none;">
+          <span class="calc-savings-icon">💡</span>
+          <div>
+            <div class="calc-savings-title">Sea freight saves you <span id="calc-savings-amt">—</span></div>
+            <div class="calc-savings-sub">vs. air freight on this order</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="calc-cta-block">
+          <div class="calc-cta-headline">Get Your <strong>Accurate Quote</strong> in 24h</div>
+          <p class="calc-cta-sub">Our team will verify exact freight rates, duties, and supplier pricing — no guesswork.</p>
+          <a href="#contact" class="calc-cta-btn">🚀 Get Exact Quote Now</a>
+          <div class="calc-trust-row">
+            <span class="calc-trust-pill">✅ Free Consultation</span>
+            <span class="calc-trust-pill">⚡ 24h Response</span>
+            <span class="calc-trust-pill">🔒 No Obligation</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ══════════════════════════════════════════════
+   SOURCING COST CALCULATOR
+══════════════════════════════════════════════ */
+.calc-section {
+  background: var(--navy);
+  padding: 90px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.calc-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 50%, rgba(232,160,32,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 90% 20%, rgba(212,43,43,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.calc-section .section-tag { color: var(--gold); }
+.calc-section .section-title { color: #fff; }
+.calc-section .section-sub { color: var(--muted); }
+.calc-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.calc-header .section-sub { margin: 0 auto; }
+
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── Input Panel ── */
+.calc-inputs-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.calc-group { display: flex; flex-direction: column; gap: 8px; }
+.calc-label {
+  font-family: var(--font-cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.calc-label-hint {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+}
+.calc-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.calc-prefix, .calc-suffix {
+  position: absolute;
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  pointer-events: none;
+}
+.calc-prefix { left: 14px; }
+.calc-suffix { right: 14px; }
+.calc-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 13px 40px 13px 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -moz-appearance: textfield;
+}
+.calc-input::-webkit-outer-spin-button,
+.calc-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-input::placeholder { color: rgba(255,255,255,0.2); }
+.calc-input:focus {
+  border-color: var(--gold);
+  background: rgba(232,160,32,0.07);
+}
+
+/* Shipping tabs */
+.calc-ship-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.calc-ship-tab {
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: center;
+}
+.calc-ship-tab.active {
+  border-color: var(--gold);
+  background: rgba(232,160,32,0.1);
+}
+.calc-ship-icon { font-size: 22px; }
+.calc-ship-name {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+.calc-ship-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+.calc-ship-tab.active .calc-ship-name { color: var(--gold); }
+
+.calc-disclaimer {
+  display: flex;
+  gap: 8px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.55;
+  font-family: var(--font-body);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 16px;
+}
+
+/* ── Results Panel ── */
+.calc-results-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+}
+.calc-results-header {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.calc-result-rows { display: flex; flex-direction: column; gap: 0; }
+.calc-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.calc-result-row:last-child { border-bottom: none; }
+.calc-result-row.total {
+  padding: 16px 0 8px;
+  border-bottom: none;
+}
+.calc-result-label {
+  font-family: var(--font-cond);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.calc-result-label-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.calc-result-val {
+  font-family: var(--font-cond);
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5px;
+}
+.calc-result-val.total {
+  font-family: var(--font-head);
+  font-size: 32px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.calc-result-val.secondary {
+  color: var(--gold-light);
+  font-size: 15px;
+}
+.calc-result-row.secondary .calc-result-label { color: rgba(255,255,255,0.4); font-size: 12px; }
+.calc-result-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  margin: 4px 0;
+}
+
+/* Savings badge */
+.calc-savings-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(232,160,32,0.1);
+  border: 1px solid rgba(232,160,32,0.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.calc-savings-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.calc-savings-title {
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.3px;
+}
+.calc-savings-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+/* CTA block */
+.calc-cta-block {
+  background: linear-gradient(135deg, var(--red) 0%, #a01a1a 100%);
+  border-radius: 12px;
+  padding: 24px 22px;
+  text-align: center;
+}
+.calc-cta-headline {
+  font-family: var(--font-cond);
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+.calc-cta-headline strong { color: #fff; }
+.calc-cta-sub { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; margin-bottom: 18px; }
+.calc-cta-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-cond);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 16px;
+  width: 100%;
+}
+.calc-cta-btn:hover { background: #f5b030; transform: scale(1.02); }
+.calc-trust-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.calc-trust-pill {
+  font-family: var(--font-cond);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 4px 10px;
+}
+
+/* Responsive */
+@media (max-width: 820px) {
+  .calc-layout { grid-template-columns: 1fr; }
+  .calc-results-panel { position: static; }
+  .calc-result-val.total { font-size: 26px; }
+}
+@media (max-width: 480px) {
+  .calc-inputs-panel, .calc-results-panel { padding: 22px 18px; }
+  .calc-ship-tabs { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<script>
+// ── Sourcing Cost Calculator Logic
+let calcShipMode = 'sea';
+
+function calcSetShip(btn, mode) {
+  calcShipMode = mode;
+  document.querySelectorAll('.calc-ship-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('res-ship-label').textContent = mode === 'sea' ? '🚢 Sea Freight' : '✈️ Air Freight';
+  calcUpdate();
+}
+
+function calcFmt(n) {
+  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+function calcUpdate() {
+  const unitCost = parseFloat(document.getElementById('calc-unit-cost').value) || 0;
+  const qty      = parseFloat(document.getElementById('calc-qty').value) || 0;
+  const weight   = parseFloat(document.getElementById('calc-weight').value) || 0;
+  const dutyPct  = parseFloat(document.getElementById('calc-duty').value) || 0;
+
+  if (!unitCost || !qty) {
+    ['res-product','res-shipping','res-duties','res-agent','res-total','res-per-unit'].forEach(id => {
+      document.getElementById(id).textContent = '—';
+    });
+    document.getElementById('calc-savings').style.display = 'none';
+    return;
+  }
+
+  const productCost = unitCost * qty;
+
+  // Shipping estimate: sea ~$1.20/kg (min $60), air ~$4.50/kg (min $80)
+  const seaRate = Math.max(weight * 1.20, 60);
+  const airRate = Math.max(weight * 4.50, 80);
+  const shippingCost = calcShipMode === 'sea' ? seaRate : airRate;
+
+  const duties = (productCost + shippingCost) * (dutyPct / 100);
+
+  // Agent fee: 5% of product cost, min $50
+  const agentFee = Math.max(productCost * 0.05, 50);
+
+  const total = productCost + shippingCost + duties + agentFee;
+  const perUnit = qty > 0 ? total / qty : 0;
+
+  document.getElementById('res-product').textContent  = calcFmt(productCost);
+  document.getElementById('res-shipping').textContent = calcFmt(shippingCost);
+  document.getElementById('res-duties').textContent   = calcFmt(duties);
+  document.getElementById('res-agent').textContent    = calcFmt(agentFee);
+  document.getElementById('res-total').textContent    = calcFmt(total);
+  document.getElementById('res-per-unit').textContent = '$' + perUnit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  // Show savings badge only when showing air mode or switch comparison
+  const savingsBadge = document.getElementById('calc-savings');
+  const savings = airRate - seaRate;
+  if (savings > 0 && calcShipMode === 'air') {
+    document.getElementById('calc-savings-amt').textContent = calcFmt(savings);
+    savingsBadge.style.display = 'flex';
+  } else if (savings > 0 && calcShipMode === 'sea') {
+    document.getElementById('calc-savings-amt').textContent = calcFmt(savings);
+    savingsBadge.querySelector('.calc-savings-title').innerHTML = 'Switching to sea saves you <span id="calc-savings-amt">' + calcFmt(savings) + '</span>';
+    savingsBadge.style.display = 'flex';
+  } else {
+    savingsBadge.style.display = 'none';
+  }
+}
+</script>
+
 <script>
   function initSlider(trackId) {
     const track = document.getElementById(trackId);
@@ -2528,150 +3026,206 @@ footer {
 ════════════════════════════════ -->
 <span class="divider-l2d"></span>
 
+<style>
+.services5-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 52px;
+}
+.services5-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 36px 30px;
+  transition: background 0.22s, border-color 0.22s, transform 0.22s;
+  position: relative;
+  overflow: hidden;
+}
+.services5-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--red));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s;
+}
+.services5-card:hover {
+  background: rgba(232,160,32,0.07);
+  border-color: rgba(232,160,32,0.35);
+  transform: translateY(-5px);
+}
+.services5-card:hover::after { transform: scaleX(1); }
+.s5-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: rgba(232,160,32,0.12);
+  border: 1px solid rgba(232,160,32,0.28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+.s5-num {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.s5-title {
+  font-family: var(--font-cond);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.s5-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.68;
+  margin-bottom: 18px;
+}
+.s5-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.s5-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+.s5-bullets li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 12px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+/* Force last card to span full width if odd count */
+@media (min-width: 640px) {
+  .services5-grid > .services5-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+</style>
+
 <section id="services" style="background: var(--navy); padding: 80px 24px;">
   <div class="container">
     <span class="section-tag" style="color: var(--gold);">What We Do</span>
     <h2 class="section-title" style="color:#fff;">Our <em>Services</em></h2>
-    <p class="section-sub">End-to-end sourcing and logistics — we handle every step from factory floor to your warehouse door.</p>
+    <p class="section-sub" style="color: var(--muted);">End-to-end sourcing — from finding the right factory to delivering goods to your door in Pakistan. No middlemen, no guesswork.</p>
 
-    <div class="services-grid">
+    <div class="services5-grid">
 
-      <div class="service-card">
-        <div class="service-icon">🔍</div>
-        <div class="service-title">Product Sourcing</div>
-        <div class="service-desc">Tell us what you need and we'll identify the best-matched factories in China, verify their legitimacy, and get you competitive quotes within 48 hours.</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🏭</div>
-        <div class="service-title">Factory Verification</div>
-        <div class="service-desc">We visit or video-audit factories on your behalf, verify business licences, production capacity, and certifications before you commit a single rupee.</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🤝</div>
-        <div class="service-title">Price Negotiation</div>
-        <div class="service-desc">Our China-based team negotiates in Mandarin to secure rock-bottom FOB prices, favorable payment terms, and MOQ flexibility for Pakistani buyers.</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🔬</div>
-        <div class="service-title">Quality Inspection</div>
-        <div class="service-desc">Pre-shipment inspections by our QC team ensure every batch meets your specs. We catch defects before they leave the factory — not after they reach you.</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🚢</div>
-        <div class="service-title">Freight & Logistics</div>
-        <div class="service-desc">Sea freight, air cargo, and express courier options. We handle booking, container loading, marine insurance, and door-to-door delivery to any city in Pakistan.</div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">📋</div>
-        <div class="service-title">Customs Clearance</div>
-        <div class="service-desc">Full documentation support — commercial invoices, packing lists, COO, HS code classification, and clearing agents at Karachi, Lahore Dry Port, and Islamabad.</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════
-     HOW IT WORKS
-════════════════════════════════ -->
-<span class="divider-d2l"></span>
-
-<section id="how-it-works" class="section-light">
-  <div class="container">
-    <div class="how-header">
-      <span class="section-tag">Simple Process</span>
-      <h2 class="section-title">How It <span>Works</span></h2>
-      <p class="section-sub" style="margin: 0 auto;">We've simplified China sourcing into 6 clear steps. You focus on your business — we handle the rest.</p>
-    </div>
-
-    <div class="steps-track">
-
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-label">Tell Us What You Need</div>
-        <div class="step-desc">Fill out our sourcing form with product details, specs, quantity, and target price.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-label">We Find Suppliers</div>
-        <div class="step-desc">Our team shortlists verified Chinese factories and shares a supplier comparison report within 48 hrs.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-label">Samples & Approval</div>
-        <div class="step-desc">We arrange product samples to be shipped to you or inspected locally before mass production.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-label">Production & QC</div>
-        <div class="step-desc">Once you approve, production begins. Our QC team inspects finished goods before packing.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">05</div>
-        <div class="step-label">Shipment & Tracking</div>
-        <div class="step-desc">We book freight, handle export docs, and give you real-time tracking from Shanghai to Karachi.</div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">06</div>
-        <div class="step-label">Delivery to Your Door</div>
-        <div class="step-desc">Customs cleared, duties paid, goods delivered to your warehouse or business address in Pakistan.</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════
-     OLD WAY VS OUR WAY
-════════════════════════════════ -->
-<span class="divider-l2d"></span>
-
-<section id="comparison" style="background: var(--navy); padding: 80px 24px;">
-  <div class="container">
-    <span class="section-tag" style="color: var(--gold);">The Difference</span>
-    <h2 class="section-title" style="color:#fff;">Old Way <em>vs</em> Our Way</h2>
-
-    <div class="comparison-grid">
-
-      <div class="comp-col old">
-        <div class="comp-header">
-          <div class="comp-badge old">Old Way</div>
-          <div class="comp-heading">Buying Blind</div>
-        </div>
-        <ul class="comp-list">
-          <li><span class="ci">✕</span> Browse Alibaba alone with no way to verify supplier legitimacy</li>
-          <li><span class="ci">✕</span> Language barriers mean you get misquoted or misunderstood</li>
-          <li><span class="ci">✕</span> No quality check — goods arrive damaged or wrong specification</li>
-          <li><span class="ci">✕</span> Stuck coordinating freight, insurance, and customs yourself</li>
-          <li><span class="ci">✕</span> Hidden port charges and surprise customs duties blow your budget</li>
-          <li><span class="ci">✕</span> Long delays with zero visibility — no one to call when your shipment stalls</li>
-          <li><span class="ci">✕</span> Minimum orders too high, capital tied up in risky first orders</li>
+      <div class="services5-card">
+        <div class="s5-icon">🏭</div>
+        <div class="s5-num">Service 01</div>
+        <div class="s5-title">Supplier Sourcing & Verification</div>
+        <div class="s5-desc">We find and rigorously vet Chinese manufacturers so you never deal with scam suppliers or unverified factories again.</div>
+        <ul class="s5-bullets">
+          <li>Shortlist best-matched factories within 48 hours</li>
+          <li>On-site or video audits of business licences & capacity</li>
+          <li>Certification & compliance checks before you commit</li>
         </ul>
       </div>
 
-      <div class="comp-col new">
-        <div class="comp-header">
-          <div class="comp-badge new">Our Way</div>
-          <div class="comp-heading">Sourcing Done Right</div>
-        </div>
-        <ul class="comp-list">
-          <li><span class="ci">✓</span> Every supplier audited and verified by our China-based team</li>
-          <li><span class="ci">✓</span> Native Mandarin negotiators secure the best prices and terms for you</li>
-          <li><span class="ci">✓</span> Pre-shipment QC inspection with full photo/video report before dispatch</li>
-          <li><span class="ci">✓</span> We handle freight, insurance, and customs end-to-end — one invoice</li>
-          <li><span class="ci">✓</span> Transparent cost breakdown with no hidden fees or surprise charges</li>
-          <li><span class="ci">✓</span> Real-time shipment tracking and a dedicated account manager on WhatsApp</li>
-          <li><span class="ci">✓</span> MOQ negotiation support — start small, scale when confident</li>
+      <div class="services5-card">
+        <div class="s5-icon">🤝</div>
+        <div class="s5-num">Service 02</div>
+        <div class="s5-title">Product Sourcing & Price Negotiation</div>
+        <div class="s5-desc">Our China-based Mandarin-speaking team secures the lowest factory prices, flexible MOQs, and favorable payment terms on your behalf.</div>
+        <ul class="s5-bullets">
+          <li>Competitive multi-supplier quote comparison</li>
+          <li>Native Mandarin negotiators — no language barriers</li>
+          <li>MOQ flexibility for small first orders</li>
+        </ul>
+      </div>
+
+      <div class="services5-card">
+        <div class="s5-icon">🔬</div>
+        <div class="s5-num">Service 03</div>
+        <div class="s5-title">Quality Inspection & Control</div>
+        <div class="s5-desc">We catch defects before goods leave the factory — not after they reach your warehouse. Every batch is inspected with full photo and video reports.</div>
+        <ul class="s5-bullets">
+          <li>Sample review & approval before mass production</li>
+          <li>Pre-shipment QC inspection against your specs</li>
+          <li>Detailed photo/video report sent to you before dispatch</li>
+        </ul>
+      </div>
+
+      <div class="services5-card">
+        <div class="s5-icon">🚢</div>
+        <div class="s5-num">Service 04</div>
+        <div class="s5-title">Logistics & Shipping Management</div>
+        <div class="s5-desc">Sea freight, air cargo, or express courier — we handle everything end-to-end including customs clearance at Karachi, Lahore Dry Port, and Islamabad.</div>
+        <ul class="s5-bullets">
+          <li>Door-to-door delivery anywhere in Pakistan</li>
+          <li>Real-time tracking with dedicated WhatsApp support</li>
+          <li>Full documentation: invoice, COO, HS codes, clearance</li>
+        </ul>
+      </div>
+
+      <div class="services5-card">
+        <div class="s5-icon">📦</div>
+        <div class="s5-num">Service 05</div>
+        <div class="s5-title">Private Label & Product Customization</div>
+        <div class="s5-desc">Launch your own brand with factory-direct private label manufacturing — custom packaging, logos, colors, and product specs tailored to your market.</div>
+        <ul class="s5-bullets">
+          <li>Custom boxes, pouches, labels & branding</li>
+          <li>OEM/ODM product modifications to your specs</li>
+          <li>Full product line development from concept to delivery</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     OLD WAY VS OUR WAY (compact)
+════════════════════════════════ -->
+<section style="background: var(--navy2); padding: 48px 24px; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 32px;">
+      <span class="section-tag" style="color: var(--gold);">The Difference</span>
+      <h2 class="section-title" style="color:#fff; font-size: clamp(28px,4vw,40px); margin-bottom:0;">Old Way <em>vs</em> Our Way</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:860px; margin:0 auto;">
+
+      <div style="background:rgba(212,43,43,0.07); border:1px solid rgba(212,43,43,0.22); border-radius:12px; padding:24px 26px;">
+        <div style="font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#f08080; margin-bottom:14px;">❌ Old Way</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:#f08080; flex-shrink:0;">✕</span> Unverified suppliers, scams & wrong specs</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:#f08080; flex-shrink:0;">✕</span> Language barriers & hidden charges</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:#f08080; flex-shrink:0;">✕</span> No QC — defects discovered after arrival</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:#f08080; flex-shrink:0;">✕</span> Freight, customs & paperwork on your own</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:#f08080; flex-shrink:0;">✕</span> Juggling shipments from multiple suppliers separately</li>
+        </ul>
+      </div>
+
+      <div style="background:rgba(232,160,32,0.07); border:1px solid rgba(232,160,32,0.28); border-radius:12px; padding:24px 26px;">
+        <div style="font-family:var(--font-cond); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">✅ Our Way</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:9px;">
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">✓</span> Every supplier audited by our China team</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">✓</span> Mandarin negotiators, transparent pricing</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">✓</span> Pre-shipment QC with photo/video report</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">✓</span> End-to-end logistics — one invoice, zero stress</li>
+          <li style="font-size:13px; color:var(--muted); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">✓</span> All suppliers consolidated into one shipment to your door</li>
         </ul>
       </div>
 
@@ -2716,58 +3270,6 @@ footer {
           <div>
             <div class="testi-name">Muhammad Raza</div>
             <div class="testi-role">Auto Parts Importer, Karachi</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">We source garments and home textiles every season. Their team sends us inspection videos before every shipment — I feel completely in control without stepping foot in China. Highly recommended!</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg, #e8a020, #a06810);">SN</div>
-          <div>
-            <div class="testi-name">Sara Niazi</div>
-            <div class="testi-role">Fashion Retailer, Islamabad</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Imported industrial CNC machines for our factory. The customs clearance alone would have taken me weeks. EzyChinaDirect cleared everything in 3 days at Lahore Dry Port. Exceptional service.</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg, #1a3a9e, #0d2060);">TQ</div>
-          <div>
-            <div class="testi-name">Tariq Qureshi</div>
-            <div class="testi-role">Factory Owner, Faisalabad</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">I run a toy wholesale business. Their team found me three alternative toy factories, negotiated down MOQs for my small budget, and the products are flying off the shelves. Couldn't be happier.</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg, #6b2d8b, #3f1a54);">HA</div>
-          <div>
-            <div class="testi-name">Hina Arshad</div>
-            <div class="testi-role">Toy Wholesaler, Rawalpindi</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">Medical equipment sourcing used to terrify me — fake certifications everywhere. EzyChinaDirect verified FDA/CE documentation before we paid a single rupee. We now import regularly with full confidence.</p>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background: linear-gradient(135deg, #0e7a6c, #095248);">ZH</div>
-          <div>
-            <div class="testi-name">Dr. Zafar Hussain</div>
-            <div class="testi-role">Medical Supplies Importer, Peshawar</div>
           </div>
         </div>
       </div>
